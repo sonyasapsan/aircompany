@@ -1,22 +1,28 @@
 package org.synergyway.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "flights")
 public class Flight {
     @Id
     private Long id;
     @Column(nullable = false)
     private FlightStatus flightStatus;
     @Column(nullable = false)
-    private Long airCompanyId;
+    @ManyToOne
+    private AirCompany airCompany;
     @Column(nullable = false)
-    private Long airplaneId;
+    @OneToOne
+    private AirCompany airplane;
     @Column(nullable = false)
     private String departureCountry;
     @Column(nullable = false)
@@ -25,11 +31,8 @@ public class Flight {
     private BigDecimal distance;
     @Column(nullable = false)
     private LocalTime estimatedFlightTime;
-    @Column(nullable = false)
     private LocalTime startedAt;
-    @Column(nullable = false)
     private LocalTime endedAt;
-    @Column(nullable = false)
     private LocalTime delayStartedAt;
     @Column(nullable = false)
     private LocalDate createdAt;

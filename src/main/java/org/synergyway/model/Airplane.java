@@ -2,10 +2,8 @@ package org.synergyway.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -20,7 +18,8 @@ public class Airplane {
     @Column(unique = true, nullable = false)
     private String factorySerialNumber;
     @Column(nullable = false)
-    private Long idAirCompany;
+    @ManyToOne
+    private AirCompany airCompany;
     @Column(nullable = false)
     private Integer numberOfFlights;
     @Column(nullable = false)
