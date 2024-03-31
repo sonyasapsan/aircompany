@@ -1,7 +1,8 @@
-package org.synergyway.dto;
+package org.synergyway.dto.airplane;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.synergyway.dto.air_company.AirCompanyDto;
 
 @AllArgsConstructor
 @Getter

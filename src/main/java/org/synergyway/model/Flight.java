@@ -1,5 +1,6 @@
 package org.synergyway.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,15 +15,18 @@ import java.time.LocalTime;
 @Table(name = "flights")
 public class Flight {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private FlightStatus flightStatus;
-    @Column(nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "air_company_id", referencedColumnName = "id", nullable = false)
     private AirCompany airCompany;
-    @Column(nullable = false)
-    @OneToOne
-    private AirCompany airplane;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(nullable = false, referencedColumnName = "id", name = "airplane_id")
+    private Airplane airplane;
     @Column(nullable = false)
     private String departureCountry;
     @Column(nullable = false)
@@ -31,14 +35,13 @@ public class Flight {
     private BigDecimal distance;
     @Column(nullable = false)
     private LocalTime estimatedFlightTime;
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startedAt;
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime endedAt;
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime delayStartedAt;
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 }
-
-/*
-ID, flight status, Air company id, airplane id, departure country, destination country,
-distance, estimated flight time, started at, ended at, delay started at, created at
- */

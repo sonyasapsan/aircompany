@@ -1,5 +1,6 @@
 package org.synergyway.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,13 +13,15 @@ import java.time.LocalDate;
 @Table(name = "airplanes")
 public class Airplane {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(unique = true, nullable = false)
     private String factorySerialNumber;
-    @Column(nullable = false)
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "air_company_id", nullable = true)
     private AirCompany airCompany;
     @Column(nullable = false)
     private Integer numberOfFlights;
@@ -29,5 +32,6 @@ public class Airplane {
     @Column(nullable = false)
     private String type;
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 }

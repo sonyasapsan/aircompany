@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-air_companies-table
+      author: sonia_sapsan
+      changes:
+        - createTable:
+            tableName: air_companies
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: company_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: founded_at
+                  type: date
+                  constraints:
+                    nullable: false

@@ -1,7 +1,9 @@
-package org.synergyway.dto;
+package org.synergyway.dto.flight;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.synergyway.dto.air_company.AirCompanyDto;
+import org.synergyway.dto.airplane.AirplaneDto;
 import org.synergyway.model.FlightStatus;
 import java.time.LocalTime;
 

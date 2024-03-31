@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-flights-table
+      author: sonia_sapsan
+      changes:
+        - createTable:
+            tableName: flights
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: flight_status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: air_company_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: airplane_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: departure_country
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: destination_country
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: distance
+                  type: decimal
+                  constraints:
+                    nullable: false
+              - column:
+                  name: estimated_flight_time
+                  type: time
+                  constraints:
+                    nullable: false
+              - column:
+                  name: started_at
+                  type: time
+              - column:
+                  name: ended_at
+                  type: time
+              - column:
+                  name: delay_started_at
+                  type: time
+              - column:
+                  name: created_at
+                  type: date
+                  constraints:
+                    nullable: false
+            foreignKeys:
+              - foreignKey:
+                  baseColumnNames: air_company_id
+                  baseTableName: flights
+                  referencedColumnNames: id
+                  referencedTableName: air_companies
+                  onDelete: cascade
+              - foreignKey:
+                  baseColumnNames: airplane_id
+                  baseTableName: flights
+                  referencedColumnNames: id
+                  referencedTableName: airplanes
+                  onDelete: cascade

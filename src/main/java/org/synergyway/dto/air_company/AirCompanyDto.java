@@ -1,4 +1,4 @@
-package org.synergyway.dto;
+package org.synergyway.dto.air_company;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

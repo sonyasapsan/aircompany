@@ -1,12 +1,9 @@
 package org.synergyway.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -15,11 +12,13 @@ import java.time.LocalDate;
 @Table(name = "air_companies")
 public class AirCompany {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "company_type")
     private String companyType;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "founded_at")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate foundedAt;
 }
