@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.synergyway.dto.air_company.AirCompanyDto;
 import org.synergyway.dto.air_company.CreateAirCompanyRequestDto;
+import org.synergyway.exception.EntityNotFoundException;
 import org.synergyway.mapper.AirCompanyMapper;
 import org.synergyway.model.AirCompany;
 import org.synergyway.repository.AirCompanyRepository;
@@ -35,13 +36,13 @@ public class AirCompanyServiceImpl implements AirCompanyService {
     @Override
     public AirCompanyDto findByName(String name) {
         return mapper.airCompanyToDto(repository.findAirCompanyByName(name)
-                .orElseThrow(() -> new RuntimeException("There is no company with such name:" + name)));
+                .orElseThrow(() -> new EntityNotFoundException("There is no company with such name:" + name)));
     }
 
     @Override
     public AirCompanyDto findById(Long id) {
         return mapper.airCompanyToDto(repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("There is no company with such id:" + id)));
+                .orElseThrow(() -> new EntityNotFoundException("There is no company with such id:" + id)));
     }
 
     @Override
@@ -53,7 +54,7 @@ public class AirCompanyServiceImpl implements AirCompanyService {
     @Override
     public AirCompanyDto updateById(CreateAirCompanyRequestDto requestDto, Long id) {
         if (!repository.existsById(id)) {
-            throw new RuntimeException("There is no company with such id:" + id);
+            throw new EntityNotFoundException("There is no company with such id:" + id);
         }
         AirCompany airCompany = mapper.toAirCompanyModel(requestDto);
         airCompany.setId(id);

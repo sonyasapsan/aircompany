@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.synergyway.dto.airplane.AirplaneDto;
 import org.synergyway.dto.airplane.AssignAirplaneToCompanyDto;
 import org.synergyway.dto.airplane.CreateAirplaneRequestDto;
+import org.synergyway.exception.EntityNotFoundException;
+import org.synergyway.exception.IncorrectDataException;
 import org.synergyway.mapper.AirplaneMapper;
 import org.synergyway.model.AirCompany;
 import org.synergyway.model.Airplane;
@@ -25,7 +27,7 @@ public class AirplaneServiceImpl implements AirplaneService {
         String companyName = requestDto.getAirCompanyName();
         if (companyName != null && airCompanyRepository.existsAirCompanyByName(companyName)) {
             airplane.setAirCompany(airCompanyRepository.findAirCompanyByName(companyName)
-                    .orElseThrow(() -> new RuntimeException("Can't assign company with such name: " + companyName)));
+                    .orElseThrow(() -> new IncorrectDataException("Can't assign company with such name: " + companyName)));
         }
         return mapper.airplaneToDto(repository.save(airplane));
     }
@@ -33,7 +35,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Override
     public AirplaneDto assignAirplaneToCompanyById(AssignAirplaneToCompanyDto companyName, Long id) {
         Airplane airplane = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No airplane with such id:" + id));
+                .orElseThrow(() -> new EntityNotFoundException("No airplane with such id:" + id));
         assignAirplaneToCompany(airplane, companyName.getNameCompany());
         return mapper.airplaneToDto(repository.save(airplane));
     }
@@ -41,14 +43,14 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Override
     public AirplaneDto assignAirplaneToCompanyByAirplaneName(AssignAirplaneToCompanyDto companyName, String airplaneName) {
         Airplane airplane = repository.findByName(airplaneName)
-                .orElseThrow(() -> new RuntimeException("No airplane with such name:" + airplaneName));
+                .orElseThrow(() -> new EntityNotFoundException("No airplane with such name:" + airplaneName));
         assignAirplaneToCompany(airplane, companyName.getNameCompany());
         return mapper.airplaneToDto(repository.save(airplane));
     }
 
     private void assignAirplaneToCompany(Airplane airplane, String companyName) {
         AirCompany company = airCompanyRepository.findAirCompanyByName(companyName)
-                .orElseThrow(() -> new RuntimeException("No company with such name:" + companyName));
+                .orElseThrow(() -> new EntityNotFoundException("No company with such name:" + companyName));
         airplane.setAirCompany(company);
     }
 }

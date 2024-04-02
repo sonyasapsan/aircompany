@@ -15,6 +15,7 @@ public final class CreateAirplaneRequestDto {
     private final String name;
     @NotBlank
     private final String factorySerialNumber;
+    @NotBlank
     private final String airCompanyName;
     @Positive
     private final int numberOfFlights;
@@ -24,5 +25,6 @@ public final class CreateAirplaneRequestDto {
     private final Double fuelCapacity;
     @NotNull
     private final String type;
+    @NotNull
     private final LocalDate createdAt;
 }

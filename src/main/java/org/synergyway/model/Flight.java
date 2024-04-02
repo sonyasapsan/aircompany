@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -23,7 +24,6 @@ public class Flight {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "air_company_id", referencedColumnName = "id", nullable = false)
     private AirCompany airCompany;
-    @MapsId
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(nullable = false, referencedColumnName = "id", name = "airplane_id")
     private Airplane airplane;
@@ -34,13 +34,14 @@ public class Flight {
     @Column(nullable = false)
     private BigDecimal distance;
     @Column(nullable = false)
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime estimatedFlightTime;
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime startedAt;
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime endedAt;
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime delayStartedAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startedAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endedAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime delayStartedAt;
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;

@@ -21,7 +21,7 @@ public class Airplane {
     private String factorySerialNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "air_company_id", nullable = true)
+    @JoinColumn(name = "air_company_id")
     private AirCompany airCompany;
     @Column(nullable = false)
     private Integer numberOfFlights;

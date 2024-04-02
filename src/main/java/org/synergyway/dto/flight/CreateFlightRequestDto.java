@@ -3,10 +3,11 @@ package org.synergyway.dto.flight;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @RequiredArgsConstructor
@@ -22,5 +23,8 @@ public final class CreateFlightRequestDto {
     private final String destinationCountry;
     @Positive
     private final BigDecimal distance;
+    @NotNull
     private final LocalTime estimatedFlightTime;
+    @NotNull
+    private final LocalDate createdAt;
 }

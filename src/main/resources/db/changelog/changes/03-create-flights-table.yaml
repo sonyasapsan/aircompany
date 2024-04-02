@@ -50,13 +50,13 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: started_at
-                  type: time
+                  type: datetime
               - column:
                   name: ended_at
-                  type: time
+                  type: datetime
               - column:
                   name: delay_started_at
-                  type: time
+                  type: datetime
               - column:
                   name: created_at
                   type: date

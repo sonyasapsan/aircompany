@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.synergyway.dto.air_company.AirCompanyDto;
 import org.synergyway.dto.air_company.CreateAirCompanyRequestDto;
 import org.synergyway.service.AirCompanyService;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
