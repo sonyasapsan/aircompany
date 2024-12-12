@@ -16,7 +16,6 @@ import java.util.List;
 @Validated
 @RestController
 @AllArgsConstructor
-@RequestMapping("/air-companies")
 public class AirCompanyController {
     private AirCompanyService companyService;
 
